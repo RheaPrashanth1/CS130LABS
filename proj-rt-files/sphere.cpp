@@ -36,6 +36,7 @@ return hitRes1;
 }
 
 else {
+if(Res1 == Res2 || Res1 != Res2) {
   if(Res1>Res2) {
     Hit one;
     one.dist = Res2;
@@ -53,9 +54,9 @@ else {
 
 
 }
+}
 
-
-//return {0,0,0};    
+return {0,0,0};    
 }
 
 vec3 Sphere::Normal(const vec3& point, int part) const

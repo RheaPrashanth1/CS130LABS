@@ -24,16 +24,21 @@ Hit Render_World::Closest_Intersection(const Ray& ray)
 {   
      Hit closest_hit;
      Hit hit;
+    hit.object = 0;
+   closest_hit.object = 0;
  // iterate through each object in objects vector, find hits, of the hits find the closest one    
     double min_t = std::numeric_limits<double>::max();
     int PART = 0;
     for (Object *obj : objects) {     
        hit = (*obj).Intersection(ray,PART);
-        if (hit.dist > small_t && hit.dist <=  min_t){
-             min_t = hit.dist;
-             closest_hit = hit; 
+          if (hit.object) {
+           if (hit.dist > small_t && hit.dist <=  min_t){
+            closest_hit = hit; 
+            min_t = hit.dist;
+            // closest_hit = hit; 
 
           }
+       }
      }
     
     return closest_hit;
@@ -45,10 +50,8 @@ void Render_World::Render_Pixel(const ivec2& pixel_index)
 {
  
    // set up the initial view ray here
-   vec3 x,y;
-    x = camera.position;
-   // y = (camera.World_Position(pixel_index)-x).normalized();
-    Ray ray(camera.position,(camera.World_Position(pixel_index)-x).normalized() );
+ 
+    Ray ray(camera.position,(camera.World_Position(pixel_index)-(camera.position)).normalized() );
     vec3 color=Cast_Ray(ray,1);
     camera.Set_Pixel(pixel_index,Pixel_Color(color));
   return;
@@ -74,19 +77,19 @@ vec3 Render_World::Cast_Ray(const Ray& ray,int recursion_depth)
     const Object *OBJ = closestHit.object;   
     vec3 randVec1;
     vec3 randVec2;
-   vec3 intersectionPoint = ray.Point(closestHit.dist);
+ 
  //   Ray *noIntRay = new Ray(randVec1, randVec2);
 
- if(OBJ) {
-      color = OBJ->material_shader->Shade_Surface(ray, intersectionPoint,OBJ->Normal(intersectionPoint,0),recursion_depth);       
+ if(!OBJ) {
+   //   color = OBJ->material_shader->Shade_Surface(ray, intersectionPoint,OBJ->Normal(intersectionPoint,0),recursion_depth);       
  
-   //color = background_shader->Shade_Surface(ray ,randVec1, randVec2,recursion_depth);
+   color = background_shader->Shade_Surface(ray ,randVec1, randVec2,recursion_depth);
 
     } 
 
   else {
-    color = this->background_shader->Shade_Surface(ray ,randVec1, randVec2,recursion_depth);
-     // color = OBJ->material_shader->Shade_Surface(ray, ray.Point(closestHit.dist),OBJ->Normal(ray.Point(closestHit.dist),0),recursion_depth);      
+    
+      color = OBJ->material_shader->Shade_Surface(ray, ray.Point(closestHit.dist),OBJ->Normal(ray.Point(closestHit.dist),0),recursion_depth);      
    
  }    
     return color;
