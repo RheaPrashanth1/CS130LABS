@@ -81,14 +81,14 @@ vec3 Render_World::Cast_Ray(const Ray& ray,int recursion_depth)
  //   Ray *noIntRay = new Ray(randVec1, randVec2);
 
  if(!OBJ) {
-   //   color = OBJ->material_shader->Shade_Surface(ray, intersectionPoint,OBJ->Normal(intersectionPoint,0),recursion_depth);       
+   //   color = OBJ->material_shader->Shade_Surface(ray, ray.Point(closestHit.dist),OBJ->Normal(ray.Point(closestHit.dist),0),recursion_depth);       
  
    color = background_shader->Shade_Surface(ray ,randVec1, randVec2,recursion_depth);
 
     } 
 
   else {
-    
+    //color = background_shader->Shade_Surface(ray ,randVec1, randVec2,recursion_depth);
       color = OBJ->material_shader->Shade_Surface(ray, ray.Point(closestHit.dist),OBJ->Normal(ray.Point(closestHit.dist),0),recursion_depth);      
    
  }    
