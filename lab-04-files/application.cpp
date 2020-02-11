@@ -1,9 +1,11 @@
 #include <GL/glew.h>
 #include "application.h"
-<<<<<<< HEAD
+//<<<<<<< HEAD
 #include <fstream>
-=======
->>>>>>> 054dd57422d978b3a62e52e9606b8f358b5fce08
+#include <sstream>
+
+//=======
+//>>>>>>> 054dd57422d978b3a62e52e9606b8f358b5fce08
 
 using namespace std;
 
@@ -41,19 +43,19 @@ void debugShader(GLuint vertexShader, GLuint fragmentShader, GLuint shaderProgra
 }
 
 GLuint loadShader(const char *vertexfilename, const char *fragmentfilename) {
-<<<<<<< HEAD
+//<<<<<<< HEAD
+//  GLuint program = 0, vertex_shader_id = 0, fragment_shader_id = 0;
+//=======
   GLuint program = 0, vertex_shader_id = 0, fragment_shader_id = 0;
-=======
- // GLuint program = 0, vertex_shader_id = 0, fragment_shader_id = 0;
 
-    GLuint program = 0, vertex_shader_id = 0, fragment_shader_id = 0;
+    /*GLuint program = 0, vertex_shader_id = 0, fragment_shader_id = 0;
     program = glCreateProgram();
     
     vertex_shader_id   = glCreateShader(GL_VERTEX_SHADER);
     fragment_shader_id = glCreateShader(GL_FRAGMENT_SHADER);
    
-    string vertex_shader   = getTextFile(vertexfilename);
-    string fragment_shader = getTextFile(fragmentfilename);
+     string vertex_shader   = getTextFile(vertexfilename);
+     string fragment_shader = getTextFile(fragmentfilename);
     
     const char* vertex_shader_cstr   = vertex_shader.c_str();
     const char* fragment_shader_cstr = fragment_shader.c_str();
@@ -69,11 +71,11 @@ GLuint loadShader(const char *vertexfilename, const char *fragmentfilename) {
     
     glLinkProgram(program);
 
+*/
 
 
 
-
->>>>>>> 054dd57422d978b3a62e52e9606b8f358b5fce08
+//>>>>>>> 054dd57422d978b3a62e52e9606b8f358b5fce08
 
   // TODO: Functions you should know to implement this
   // glCreateShader
@@ -85,7 +87,7 @@ GLuint loadShader(const char *vertexfilename, const char *fragmentfilename) {
   // http:// www.opengl.org/sdk/docs/man/
   // http:// www.lighthouse3d.com/tutorials/glsl-tutorial/creating-a-shader/
   // You are provided with the function getTextFile to load a string from a text file
-<<<<<<< HEAD
+
     program = glCreateProgram();
     vertex_shader_id = glCreateShader(GL_VERTEX_SHADER);
     string vertex_shader = getTextFile(vertexfilename);   
@@ -102,10 +104,10 @@ GLuint loadShader(const char *vertexfilename, const char *fragmentfilename) {
     glAttachShader(program, fragment_shader_id);
     glLinkProgram(program); 
      debugShader(vertex_shader_id, fragment_shader_id, program);
-=======
+
 
   debugShader(vertex_shader_id, fragment_shader_id, program);
->>>>>>> 054dd57422d978b3a62e52e9606b8f358b5fce08
+
   return program;
 }
 
